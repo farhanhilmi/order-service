@@ -1,0 +1,32 @@
+{
+  "name": "order-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farhanhilmi/order-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farhanhilmi/order-service/issues"
+  },
+  "homepage": "https://github.com/farhanhilmi/order-service#readme",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.6.1",
+    "@grpc/proto-loader": "^0.6.9",
+    "dotenv": "^16.0.0",
+    "joi": "^17.6.0",
+    "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
