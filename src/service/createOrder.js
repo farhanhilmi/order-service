@@ -1,7 +1,8 @@
 import grpc from '@grpc/grpc-js';
-import { addNewOrder } from '../repository/orderRepo.js';
 import { validateAddOrder } from '../utils/validation.js';
 import productService from './productService.js';
+
+import producer from './kafkaProducer.js';
 
 export default async (call, callback) => {
   try {
@@ -27,12 +28,13 @@ export default async (call, callback) => {
       }),
     );
 
-    const newOrder = await addNewOrder({
+    producer.sendRecord('user_order', {
       userId,
       products: newProduct,
       total: totalPrice,
     });
-    callback(null, newOrder);
+
+    callback(null, { status: 'successfully published to topic' });
   } catch (err) {
     callback(err);
   }
