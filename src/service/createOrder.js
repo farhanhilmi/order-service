@@ -7,6 +7,7 @@ import producer from './kafkaProducer.js';
 export default async (call, callback) => {
   try {
     const { userId, products } = call.request;
+    console.log(call.request);
     const { error } = validateAddOrder({ userId, products });
     if (error) {
       callback({
@@ -21,7 +22,7 @@ export default async (call, callback) => {
       products.map(async (prod) => {
         const product = await productService.getProductByid(prod.productId);
         if (product.quantity < prod.qty) {
-          throw Error(`insufficient quantity for orderId ${product._id}`);
+          throw Error(`insufficient quantity for productId ${product._id}`);
         }
         totalPrice += product.price * prod.qty;
         return { productId: product._id, price: product.price, qty: prod.qty };

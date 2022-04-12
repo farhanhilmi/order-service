@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const productSchema = new Schema({
+const productSchema = {
   productId: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -16,7 +16,7 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-});
+};
 
 const orderSchema = new mongoose.Schema(
   {

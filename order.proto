@@ -2,7 +2,7 @@ syntax = "proto3";
 
 service OrderService {
   rpc createOrder (AddOrder) returns (Status) {}
-  rpc validateOrderId (orderId) returns (Status) {}
+  rpc validateOrderId (orderId) returns (Order) {}
 }
 
 message Empty {}
