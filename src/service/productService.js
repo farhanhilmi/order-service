@@ -1,8 +1,8 @@
 import client from '../grpc/product.js';
 
-const checkQty = (id) => {
+const checkAndUpdateProductQty = (products) => {
   return new Promise((resolve, reject) => {
-    client.checkProductQty({ _id: id }, (error, response) => {
+    client.checkAndUpdateProductQty({ products }, (error, response) => {
       if (error) reject(error);
       resolve(response);
     });
@@ -18,4 +18,4 @@ const getProductByid = (id) => {
   });
 };
 
-export default { checkQty, getProductByid };
+export default { checkAndUpdateProductQty, getProductByid };

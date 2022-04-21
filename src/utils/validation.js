@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
 const productItems = Joi.object({
-  productId: Joi.string().required(),
-  qty: Joi.number().required(),
+  _id: Joi.string().required(),
+  orderedQty: Joi.number().required(),
 });
 
 const validateAddOrder = (order) => {

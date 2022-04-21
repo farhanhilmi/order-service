@@ -11,11 +11,15 @@ await producer.connect();
 
 export default {
   sendRecord: async (topic, data) => {
-    const bufferData = Buffer.from(JSON.stringify(data));
-    const record = {
-      topic,
-      messages: [{ value: bufferData }],
-    };
-    await producer.send(record);
+    try {
+      const bufferData = Buffer.from(JSON.stringify(data));
+      const record = {
+        topic,
+        messages: [{ value: bufferData }],
+      };
+      await producer.send(record);
+    } catch (error) {
+      return error;
+    }
   },
 };
