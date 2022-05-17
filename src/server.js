@@ -39,11 +39,11 @@ mongoose.connection.on('error', (err) => {
 });
 
 server.bindAsync(
-  '127.0.0.1:8001',
+  config.app.port,
   grpc.ServerCredentials.createInsecure(),
   (error, port) => {
     if (error) console.log('Error: ', error);
-    console.log(`Server running at http://127.0.0.1:${port}`);
+    console.log(`Server running at ${config.app.port}`);
     server.start();
   },
 );
