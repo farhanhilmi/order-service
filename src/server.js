@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 
-import createOrder from './service/createOrder.js';
-import validateOrderId from './service/validateOrderId.js';
+import orderHandler from './handler/orderHandler.js';
 
 import config from './config/index.js';
 
@@ -22,8 +21,8 @@ const orderPackage = grpc.loadPackageDefinition(packageDef);
 
 const server = new grpc.Server();
 server.addService(orderPackage.OrderService.service, {
-  createOrder,
-  validateOrderId,
+  createOrder: orderHandler.createOrder,
+  validateOrderId: orderHandler.validateOrderId,
 });
 
 mongoose.connect(config.db.uri, {
