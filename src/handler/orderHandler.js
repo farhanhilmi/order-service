@@ -7,7 +7,9 @@ const validateOrderId = async (call, callback) => {
   try {
     const { _id } = call.request;
     const order = await isOrderIdAvailable(_id);
-
+    if (order instanceof Error) {
+      throw new Error(order.message);
+    }
     callback(null, order);
   } catch (error) {
     if (error instanceof Error) {
