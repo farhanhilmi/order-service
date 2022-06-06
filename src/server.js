@@ -2,6 +2,12 @@ import mongoose from 'mongoose';
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 
+// express
+import express, { json, urlencoded } from 'express';
+import swaggerUI from 'swagger-ui-express';
+
+import swaggerDocument from './docs/swaggerSchema.js';
+
 import orderHandler from './handler/orderHandler.js';
 
 import config from './config/index.js';
@@ -13,6 +19,12 @@ const options = {
   defaults: true,
   oneofs: true,
 };
+
+const app = express();
+app.use(json());
+app.use(urlencoded({ extended: false }));
+
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const PROTO_PATH = './order.proto';
 
@@ -38,11 +50,12 @@ mongoose.connection.on('error', (err) => {
 });
 
 server.bindAsync(
-  config.app.port,
+  config.app.host,
   grpc.ServerCredentials.createInsecure(),
   (error, port) => {
     if (error) console.log('Error: ', error);
-    console.log(`Server running at ${config.app.port}`);
     server.start();
+    console.log(`Server running at ${config.app.host}`);
+    app.listen(config.app.port);
   },
 );

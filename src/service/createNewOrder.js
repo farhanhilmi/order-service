@@ -5,7 +5,6 @@ import producer from './kafkaProducer.js';
 
 export default async (userId, products) => {
   // validation
-  console.log('TESTT');
   const { error } = validateAddOrder({ userId, products });
   if (error) throw new Error('make sure the input pattern is correct');
 
