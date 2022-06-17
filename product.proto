@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+service ProductService {
+  rpc getProduct (productId) returns (Product) {}
+  rpc getAllProduct (Empty) returns (ListProduct) {}
+  rpc addProduct (AddProduct) returns (Product) {}
+  rpc isProductsAvailable (productsId) returns (status) {}
+  rpc checkAndUpdateProductQty (listCheckAndUpdateQty) returns (listProductQty) {}
+}
+
+message Empty {}
+
+message CheckAndUpdateQty {
+  string _id = 1;
+  int32 orderedQty = 2;
+}
+
+message listCheckAndUpdateQty {
+  repeated CheckAndUpdateQty products = 1;
+}
+
+message productQty {
+  string _id = 1;
+  int32 quantity = 2;
+  int32 price = 3;
+}
+
+message AddProduct {
+  string name = 1;
+  string description = 2;
+  int32 quantity = 3;
+  int32 price = 4;
+}
+
+message Product {
+  string name = 1;
+  string description = 2;
+  int32 quantity = 3;
+  string _id = 4;
+  int32 price = 5;
+}
+
+message productId {
+  string _id = 1;
+}
+
+message productsId {
+  repeated string productsId = 1;
+}
+
+message listProductQty {
+  repeated productQty listProductQty = 1;
+}
+
+message ListProduct {
+  repeated Product products = 1;
+}
+
+message status {
+  string status = 1;
+}

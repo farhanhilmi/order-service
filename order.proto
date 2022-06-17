@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+service OrderService {
+  rpc createOrder (AddOrder) returns (Status) {}
+  rpc validateOrderId (orderId) returns (Order) {}
+}
+
+message Empty {}
+
+message orderId {
+  string _id = 1;
+}
+
+message AddProduct {
+  string _id = 1;
+  int32 orderedQty = 2;
+}
+
+message AddOrder {
+  string userId = 1;
+  repeated AddProduct products = 2;
+}
+
+message Product {
+  string productId = 1;
+  int32 qty = 2;
+  int32 price = 3;
+}
+
+message Order {
+  string _id  = 1;
+  string userId = 2;
+  repeated Product products = 3;
+  int32 total = 4;
+}
+
+message Status {
+  string status = 1;
+}
